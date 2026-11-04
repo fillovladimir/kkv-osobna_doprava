@@ -121,7 +121,7 @@
         .note { display: inline-block; margin-top: 25px; color: #174d92; text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
         .note:hover { color: #174d92; }
 
-        .q-image { display: none; max-width: 100%; height: auto; margin: 25px auto 0 auto; border-radius: 12px; border: 1px solid var(--border); }
+        .q-image { display: none; max-width: 50%; height: auto; margin: 25px auto 25px auto; border-radius: 12px; border: 1px solid var(--border); }
         .welcome-image { max-width: 100%; height: auto; margin: 30px auto; border-radius: 15px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2); border: 1px solid var(--border); }
         
         .link-row { display: flex;                /* Aktivuje flexbox */justify-content: space-between; /* Roztiahne prvky na kraje */  align-items: center;          /* Zarovná ich zvislo na stred */ margin: 20px 0;               /* Odsadenie od ostatného textu */ }
@@ -169,7 +169,7 @@
             <button class="btn-reset" onclick="clearErrors()">Reset chybných odpovedí</button>
             
             <div style="text-align: center;">
-            <img src="kkv.jpg" alt="KKV Ilustrácia" class="welcome-image" style="max-width: 700px; width: 100%;">
+            <img src="kkv_D.jpg" alt="KKV Ilustrácia" class="welcome-image" style="max-width: 700px; width: 100%;">
             </div>
 
             <a href="mailto:fillo.vladimir@gmail.com?subject=KKV-feedback" class="note">
@@ -222,8 +222,8 @@
             
             <div class="card">
                 <div id="q-text" class="question"></div>
-                <div id="options" class="options"></div>
                 <img id="q-image" class="q-image" src="" alt="Obrázok k otázke">
+                <div id="options" class="options"></div>
             </div>
 
             <div class="nav-controls">
@@ -261,7 +261,7 @@
         
     </div>
 
-    <script src="Q&A.js"></script>
+    <script src="Q&A_D.js"></script>
 
     <script>
         let currentQuestions = [];
@@ -364,8 +364,13 @@
             optionsDiv.innerHTML = '';
             
             const imgElement = document.getElementById('q-image');
-            imgElement.style.display = (qNum >= 161 && qNum <= 167) ? 'block' : 'none';
-            if (imgElement.style.display === 'block') imgElement.src = qNum + ".jpg";
+            if (q.image) {
+                imgElement.style.display = 'block';
+                imgElement.src = q.image;
+            } else {
+                imgElement.style.display = 'none';
+                imgElement.src = '';
+            }
 
             q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
